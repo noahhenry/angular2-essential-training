@@ -8,18 +8,24 @@ import { MediaItemService } from './media-item.service';
   styleUrls: ['app/media-item-list.component.css']
 })
 export class MediaItemListComponent {
-  mediaItems;
+  medium = '';
+  mediaItems = [];
 
   constructor(private mediaItemService: MediaItemService) {}
 
   ngOnInit() {
-    this.mediaItemService.get().subscribe(mediaItems => {
-      this.mediaItems = mediaItems;
-    });
+    this.getMediaItems(this.medium);
   }
 
-  onMediaItemDelete(mediaItem) { 
+  onMediaItemDelete(mediaItem) {
     this.mediaItemService.delete(mediaItem);
   }
 
+  getMediaItems(medium) {
+    this.medium = medium;
+    this.mediaItemService.get(medium)
+      .subscribe(mediaItems => {
+        this.mediaItems = mediaItems;
+      });
+  }
 }
