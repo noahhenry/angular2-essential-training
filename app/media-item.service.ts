@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 @Injectable()
@@ -8,24 +8,27 @@ export class MediaItemService {
 
   get(medium) {
     let getOptions = {
-      params: {
-        medium
-      }
+      params: { medium }
     };
-    return this.http.get<MediaItemsResponse>('mediaitems', getOptions).pipe(
-      map((response: MediaItemsResponse ) => {
-        return response.mediaItems;
-      })
-    );
+    return this.http.get<MediaItemsResponse>('mediaitems', getOptions)
+      .pipe(
+        map((response: MediaItemsResponse) => {
+          return response.mediaItems;
+        })
+      );
   }
-
+  
   add(mediaItem) {
     return this.http.post('mediaitems', mediaItem);
   }
-
+  
   delete(mediaItem) {
     return this.http.delete(`mediaitems/${mediaItem.id}`);
   }
+}
+
+interface MediaItemsResponse {
+  mediaItems: MediaItem[]
 }
 
 interface MediaItem {
@@ -36,8 +39,4 @@ interface MediaItem {
   year: number;
   watchedOn: number;
   isFavorite: boolean;
-}
-
-interface MediaItemsResponse {
-  mediaItems: MediaItem[];
 }

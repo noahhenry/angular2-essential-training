@@ -30,23 +30,26 @@ export class MediaItemFormComponent {
   }
 
   yearValidator(control) {
-    if(control.value.trim().length === 0) {
+    if (control.value.trim().length === 0) {
       return null;
     }
     let year = parseInt(control.value);
     let minYear = 1800;
     let maxYear = 2500;
-    if(year >= minYear && year <= maxYear) {
+    if (year >= minYear && year <= maxYear) {
       return null;
     } else {
-      return { 'year': {
-        'min': minYear,
-        'max': maxYear
-      } };
+      return {
+        'year': {
+          min: minYear,
+          max: maxYear
+        }
+      };
     }
   }
 
   onSubmit(mediaItem) {
-    this.mediaItemService.add(mediaItem).subscribe();
+    this.mediaItemService.add(mediaItem)
+      .subscribe();
   }
 }
