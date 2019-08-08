@@ -32,7 +32,7 @@ import { routing } from './app.routing';
   providers: [
     MediaItemService,
     { provide: lookupListToken, useValue: lookupLists },
-    { provide: HttpXhrBackend, useClass: MockXHRBackend}
+    { provide: HttpXhrBackend, useClass: MockXHRBackend }
   ],
   bootstrap: [
     AppComponent
